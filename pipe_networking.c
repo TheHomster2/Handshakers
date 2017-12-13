@@ -18,15 +18,18 @@ int server_handshake(int *to_client) {
 
   // wait for message
   char buf[HANDSHAKE_BUFFER_SIZE];
+  printf("asdfasdfasdf\n");
   read(from, buf, sizeof(buf));
 
   // send message back
   remove("WKP");
   char buff[sizeof(ACK)] = ACK;
   int to = open(buf, O_WRONLY);
+  printf("asdfasdfasdf\n");
   write(to, buff, strlen(buff));
 
   // confirm sending capabilities
+  printf("asdfasdfasdf\n");
   read(from, buff, sizeof(buff));
 
   // check message
@@ -60,9 +63,11 @@ int client_handshake(int *to_server) {
   // wait for response
   int fromserver = open(buf, O_RDONLY);
   char buff[HANDSHAKE_BUFFER_SIZE];
+  printf("asdf\n");
   read(fromserver, buff, sizeof(buff));
 
   // confirm response
+  printf("asdf\n");
   write(toserver, buff, strlen(buf));
 
   // return fds

@@ -7,7 +7,7 @@ int main() {
 
   // shake
   from_server = client_handshake(&to_server);
-
+  
   // get user input and send it to server
   char buf[BUFFER_SIZE];
   printf("input:");
