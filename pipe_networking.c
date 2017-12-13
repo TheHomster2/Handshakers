@@ -11,10 +11,24 @@
   returns the file descriptor for the upstream pipe.
   =========================*/
 int server_handshake(int *to_client) {
-  int wkp = mkfifo("WKP", 0644);
-	int fd = open("WKP", O_RDONLY);
-	
-  return 0;
+  // make fifo
+  if(mkfifo("WKP", 0644))
+    perror("mkfifo");
+	int from = open("WKP", O_RDONLY);
+
+  // wait for message
+  char buf[HANDSHAKE_BUFFER_SIZE];
+  read(from, buf, sizeof(buf));
+
+  // send message back
+  remove("WKP");
+  char buff[BUFFER_SIZE] = ACK;
+  int to = open(buf, O_WRONLY);
+  write(to, buff, sizeof(buff));
+
+  // return fds
+  *to_client = to;
+  return from;
 }
 
 
@@ -28,8 +42,23 @@ int server_handshake(int *to_client) {
   returns the file descriptor for the downstream pipe.
   =========================*/
 int client_handshake(int *to_server) {
-	int fd = open("WKP", O_WRONLY);
-	char *buf = "";	
-	write(fd, )  
-	return 0;
+  // write to WKP
+	int toserver = open("WKP", O_WRONLY);
+	char buf[HANDSHAKE_BUFFER_SIZE];
+  sprintf(buf, "%d", getpid());
+  if(mkfifo(buf, 0644))
+    perror("mkfifo");
+	write(toserver, buf, sizeof(buf));
+
+  // wait for response
+  int fromserver = open(buf, O_RDONLY);
+  char buff[BUFFER_SIZE];
+  read(fromserver, buff, sizeof(buff));
+
+  //check
+  
+
+  // return fd
+  *to_server = toserver;
+	return fromserver;
 }
