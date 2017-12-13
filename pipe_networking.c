@@ -58,6 +58,7 @@ int client_handshake(int *to_server) {
   sprintf(buf, "%d", getpid());
   if(mkfifo(buf, 0644))
     perror("mkfifo");
+  printf("asdfasdfasdf\n");  
 	write(toserver, buf, strlen(buf));
 
   // wait for response
