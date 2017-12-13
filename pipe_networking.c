@@ -56,7 +56,8 @@ int client_handshake(int *to_server) {
   read(fromserver, buff, sizeof(buff));
 
   //check
-  
+  if(strcmp(buff, ACK))
+    printf("wrong message: %s\n", buff);
 
   // return fd
   *to_server = toserver;
