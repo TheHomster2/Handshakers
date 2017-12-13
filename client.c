@@ -10,7 +10,9 @@ int main() {
 
   // get user input and send it to server
   char buf[BUFFER_SIZE];
+  printf("input:");
   fgets(buf, sizeof(buf), stdin);
+  printf("you entered: %s\n", buf);
   write(to_server, buf, strlen(buf));
 
   // get processed string back and print it
