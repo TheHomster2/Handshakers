@@ -58,14 +58,17 @@ int client_handshake(int *to_server) {
   sprintf(buf, "%d", getpid());
   if(mkfifo(buf, 0644))
     perror("mkfifo");
-  printf("asdfasdfasdf\n");  
+  printf("asdfasdfasdf\n");
 	write(toserver, buf, strlen(buf));
+  printf("asdf\n");
 
   // wait for response
   int fromserver = open(buf, O_RDONLY);
+  printf("asdf\n");
   char buff[HANDSHAKE_BUFFER_SIZE];
   printf("asdf\n");
   read(fromserver, buff, sizeof(buff));
+  remove(buf);
 
   // confirm response
   printf("asdf\n");
