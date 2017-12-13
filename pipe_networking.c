@@ -60,8 +60,7 @@ int client_handshake(int *to_server) {
     perror("mkfifo");
   printf("asdfasdfasdf\n");
 	write(toserver, buf, strlen(buf));
-  printf("asdf\n");
-
+  perror("write");
   // wait for response
   int fromserver = open(buf, O_RDONLY);
   printf("asdf\n");
