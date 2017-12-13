@@ -22,9 +22,16 @@ int server_handshake(int *to_client) {
 
   // send message back
   remove("WKP");
-  char buff[BUFFER_SIZE] = ACK;
+  char buff[sizeof(ACK)] = ACK;
   int to = open(buf, O_WRONLY);
-  write(to, buff, sizeof(buff));
+  write(to, buff, strlen(buff));
+
+  // confirm sending capabilities
+  read(from, buff, sizeof(buff));
+
+  // check message
+  if(strcmp(buff, ACK))
+    printf("wrong message: %s\n", buff);
 
   // return fds
   *to_client = to;
@@ -48,18 +55,17 @@ int client_handshake(int *to_server) {
   sprintf(buf, "%d", getpid());
   if(mkfifo(buf, 0644))
     perror("mkfifo");
-	write(toserver, buf, sizeof(buf));
+	write(toserver, buf, strlen(buf));
 
   // wait for response
   int fromserver = open(buf, O_RDONLY);
-  char buff[BUFFER_SIZE];
+  char buff[HANDSHAKE_BUFFER_SIZE];
   read(fromserver, buff, sizeof(buff));
 
-  //check
-  if(strcmp(buff, ACK))
-    printf("wrong message: %s\n", buff);
+  // confirm response
+  write(toserver, buff, strlen(buf));
 
-  // return fd
+  // return fds
   *to_server = toserver;
 	return fromserver;
 }
