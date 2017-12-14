@@ -24,19 +24,17 @@ int server_handshake(int *to_client) {
   
   // send message back
   remove("WKP");
-  char buff[sizeof(ACK)] = ACK;
   int to = open(buf, O_WRONLY);
+  char buff[sizeof(ACK)] = ACK;
   printf("asdfasdfasdf\n");
   write(to, buff, sizeof(buff));
   printf("server writing buf: %s\n", buff);
   
   // confirm sending capabilities
-
-  //====BLOCKS HERE====
   read(from, buff, sizeof(buff));
   printf("server reading buff: %s\n", buff);
   printf("asdfasdfasdf\n");
-  
+
   // check message
   if(strcmp(buff, ACK))
     printf("wrong message: %s\n", buff);
@@ -67,7 +65,7 @@ int client_handshake(int *to_server) {
   write(toserver, buf, sizeof(buf));
   printf("client writing buf: %s\n", buf);
   perror("write");
-  
+
   // wait for response
   // i don't know why it's blocking on this open
   int fromserver = open(buf, O_RDONLY);
@@ -75,7 +73,6 @@ int client_handshake(int *to_server) {
   char buff[HANDSHAKE_BUFFER_SIZE];
   printf("asdf\n");
   read(fromserver, buff, sizeof(buff));
-  
   printf("client reading buff: %s\n", buff);
   remove(buf);
 
