@@ -23,8 +23,8 @@ int server_handshake(int *to_client) {
 
   // send message back
   remove("WKP");
-  char buff[sizeof(ACK)] = ACK;
   int to = open(buf, O_WRONLY);
+  char buff[sizeof(ACK)] = ACK;
   printf("asdfasdfasdf\n");
   write(to, buff, strlen(buff));
 
@@ -61,6 +61,7 @@ int client_handshake(int *to_server) {
   printf("asdfasdfasdf\n");
 	write(toserver, buf, strlen(buf));
   perror("write");
+  
   // wait for response
   int fromserver = open(buf, O_RDONLY);
   printf("asdf\n");
