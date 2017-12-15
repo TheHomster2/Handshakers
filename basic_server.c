@@ -39,10 +39,12 @@ int main() {
 
   // rot13 and send back
   rot13(buf);
+  printf("asdfasdfasdf\n");
 
   // transupper(buf);
   write(to_client, buf, sizeof(buf));
-  
+  printf("asdfasdfasdf\n");
+
   close(to_client);
   close(from_client);
 

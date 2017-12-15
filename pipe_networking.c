@@ -20,7 +20,7 @@ int server_handshake(int *to_client) {
   char buf[HANDSHAKE_BUFFER_SIZE];
   // printf("asdfasdfasdf\n");
   read(from, buf, sizeof(buf));
-  printf("server reading buf: %s\n", buf);
+  // printf("server reading buf: %s\n", buf);
 
   // send message back
   remove("WKP");
@@ -63,8 +63,8 @@ int client_handshake(int *to_server) {
     perror("mkfifo");
   // printf("asdfasdfasdf\n");
   write(toserver, buf, sizeof(buf));
-  printf("client writing buf: %s\n", buf);
-  perror("write");
+  // printf("client writing buf: %s\n", buf);
+  // perror("write");
 
   // wait for response
   // i don't know why it's blocking on this open
