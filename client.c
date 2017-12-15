@@ -14,7 +14,7 @@ int main() {
     printf("input:");
     fgets(buf, sizeof(buf), stdin);
     printf("you entered: %s\n", buf);
-    write(to_server, buf, sizeof(buf));
+    write(to_server, buf, strlen(buf));
 
     // get processed string back and print it
     read(from_server, buf, sizeof(buf));
@@ -22,6 +22,6 @@ int main() {
   }
   close(to_server);
   close(from_server);
-  
+
   return 0;
 }

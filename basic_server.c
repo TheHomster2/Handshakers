@@ -36,13 +36,13 @@ int main() {
   while(1){
     char buf[BUFFER_SIZE];
     read(from_client, buf, sizeof(buf));
-    printf("revieved: %s\n", buf);
+    printf("recieved: %s\n", buf);
 
     // rot13 and send back
     rot13(buf);
 
     // transupper(buf);
-    write(to_client, buf, sizeof(buf));
+    write(to_client, buf, strlen(buf));
   }
   close(to_client);
   close(from_client);
