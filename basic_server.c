@@ -17,6 +17,8 @@ void rot13(char *buf){
 // anthony this is wrong
 // 1. you're supposed to modify str not return a different string
 // 2. it's supposed to switch upper to lower not just one way
+// 3. there's nothing wrong with doing work early
+// 4. actually do work not cop out and look for built in functions
 // unsigned char * transupper(char *str) {
 //     unsigned char *str1 = (unsigned char *) str;
 //     int i = 0;
@@ -43,7 +45,7 @@ int main() {
   printf("asdfasdfasdf\n");
 
   // transupper(buf);
-  write(to_client, buf, sizeof(buf));
+  write(to_client, buf, strlen(buf) + 1);
   printf("asdfasdfasdf\n");
 
   close(to_client);

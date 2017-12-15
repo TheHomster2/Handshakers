@@ -27,7 +27,7 @@ int server_handshake(int *to_client) {
   int to = open(buf, O_WRONLY);
   char buff[sizeof(ACK)] = ACK;
   // printf("asdfasdfasdf\n");
-  write(to, buff, sizeof(buff));
+  write(to, buff, strlen(buff) + 1);
   printf("server writing buf: %s\n", buff);
 
   // confirm sending capabilities
@@ -62,7 +62,7 @@ int client_handshake(int *to_server) {
   if(mkfifo(buf, 0644))
     perror("mkfifo");
   // printf("asdfasdfasdf\n");
-  write(toserver, buf, sizeof(buf));
+  write(toserver, buf, strlen(buf) + 1);
   // printf("client writing buf: %s\n", buf);
   // perror("write");
 
@@ -78,7 +78,7 @@ int client_handshake(int *to_server) {
 
   // confirm response
   // printf("asdf\n");
-  write(toserver, buff, sizeof(buff));
+  write(toserver, buff, strlen(buff) + 1);
 
   printf("client writing buff: %s\n", buff);
 

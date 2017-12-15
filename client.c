@@ -13,7 +13,7 @@ int main() {
   printf("input:");
   fgets(buf, sizeof(buf), stdin);
   printf("you entered: %s", buf);
-  write(to_server, buf, sizeof(buf));
+  write(to_server, buf, strlen(buf) + 1);
 
   // get processed string back and print it
   read(from_server, buf, sizeof(buf));
