@@ -8,9 +8,9 @@ void rot13(char *buf){
     else if (('A' <= buf[i]) && (buf[i] < 'A' + 13))
       buf[i] += 13;
     else if (('Z' - 13 < buf[i]) && (buf[i] <= 'Z'))
-      buf[i] += 13;
+      buf[i] -= 13;
     else if (('z' - 13 < buf[i]) && (buf[i] < 'z'))
-      buf[i] += 13;
+      buf[i] -= 13;
     i ++;
   }
 }
