@@ -33,17 +33,16 @@ int main() {
   from_client = server_handshake(&to_client);
 
   // wait for client
-  while(1){
-    char buf[BUFFER_SIZE];
-    read(from_client, buf, sizeof(buf));
-    printf("recieved: %s\n", buf);
+  char buf[BUFFER_SIZE];
+  read(from_client, buf, sizeof(buf));
+  printf("recieved: %s\n", buf);
 
-    // rot13 and send back
-    rot13(buf);
+  // rot13 and send back
+  rot13(buf);
 
-    // transupper(buf);
-    write(to_client, buf, strlen(buf));
-  }
+  // transupper(buf);
+  write(to_client, buf, sizeof(buf));
+  
   close(to_client);
   close(from_client);
 
