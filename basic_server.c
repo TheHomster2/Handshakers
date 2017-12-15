@@ -11,6 +11,7 @@ void rot13(char *buf){
       buf[i] += 13;
     else if (('z' - 13 < buf[i]) && (buf[i] < 'z'))
       buf[i] += 13;
+    i ++;
   }
 }
 
@@ -35,10 +36,9 @@ int main() {
   from_client = server_handshake(&to_client);
 
   // wait for client
-  sleep(5);
   char buf[BUFFER_SIZE];
   read(from_client, buf, sizeof(buf));
-  printf("recieved: %s\n", buf);
+  printf("recieved: %s", buf);
 
   // rot13 and send back
   rot13(buf);
