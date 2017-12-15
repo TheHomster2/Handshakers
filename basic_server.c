@@ -35,19 +35,18 @@ int main() {
   // shake
   from_client = server_handshake(&to_client);
 
-  // wait for client
-  char buf[BUFFER_SIZE];
-  read(from_client, buf, sizeof(buf));
-  printf("recieved: %s", buf);
+  while(1){
+    // wait for client
+    char buf[BUFFER_SIZE];
+    read(from_client, buf, sizeof(buf));
+    printf("recieved: %s", buf);
 
-  // rot13 and send back
-  rot13(buf);
-  printf("asdfasdfasdf\n");
+    // rot13 and send back
+    rot13(buf);
 
-  // transupper(buf);
-  write(to_client, buf, strlen(buf) + 1);
-  printf("asdfasdfasdf\n");
-
+    // transupper(buf);
+    write(to_client, buf, strlen(buf) + 1);
+  }
   close(to_client);
   close(from_client);
 
