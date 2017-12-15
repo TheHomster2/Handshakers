@@ -26,7 +26,6 @@ void rot13(char *buf){
 // return str1;
 
 int main() {
-  printf("%s\n", "c" + 3);
   int to_client;
   int from_client;
 

@@ -18,22 +18,22 @@ int server_handshake(int *to_client) {
 
   // wait for message
   char buf[HANDSHAKE_BUFFER_SIZE];
-  printf("asdfasdfasdf\n");
+  // printf("asdfasdfasdf\n");
   read(from, buf, sizeof(buf));
   printf("server reading buf: %s\n", buf);
-  
+
   // send message back
   remove("WKP");
   int to = open(buf, O_WRONLY);
   char buff[sizeof(ACK)] = ACK;
-  printf("asdfasdfasdf\n");
+  // printf("asdfasdfasdf\n");
   write(to, buff, sizeof(buff));
   printf("server writing buf: %s\n", buff);
-  
+
   // confirm sending capabilities
   read(from, buff, sizeof(buff));
   printf("server reading buff: %s\n", buff);
-  printf("asdfasdfasdf\n");
+  // printf("asdfasdfasdf\n");
 
   // check message
   if(strcmp(buff, ACK))
@@ -61,7 +61,7 @@ int client_handshake(int *to_server) {
   sprintf(buf, "%d", getpid());
   if(mkfifo(buf, 0644))
     perror("mkfifo");
-  printf("asdfasdfasdf\n");
+  // printf("asdfasdfasdf\n");
   write(toserver, buf, sizeof(buf));
   printf("client writing buf: %s\n", buf);
   perror("write");
@@ -69,19 +69,19 @@ int client_handshake(int *to_server) {
   // wait for response
   // i don't know why it's blocking on this open
   int fromserver = open(buf, O_RDONLY);
-  printf("asdf\n");
+  // printf("asdf\n");
   char buff[HANDSHAKE_BUFFER_SIZE];
-  printf("asdf\n");
+  // printf("asdf\n");
   read(fromserver, buff, sizeof(buff));
   printf("client reading buff: %s\n", buff);
   remove(buf);
 
   // confirm response
-  printf("asdf\n");
+  // printf("asdf\n");
   write(toserver, buff, sizeof(buff));
 
   printf("client writing buff: %s\n", buff);
-  
+
   // return fds
   *to_server = toserver;
 	return fromserver;
