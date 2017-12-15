@@ -33,6 +33,7 @@ int main() {
   from_client = server_handshake(&to_client);
 
   // wait for client
+  wait(1);
   char buf[BUFFER_SIZE];
   read(from_client, buf, sizeof(buf));
   printf("recieved: %s\n", buf);

@@ -12,7 +12,7 @@ int main() {
   char buf[BUFFER_SIZE];
   printf("input:");
   fgets(buf, sizeof(buf), stdin);
-  printf("you entered: %s\n", buf);
+  printf("you entered: %s", buf);
   write(to_server, buf, sizeof(buf));
 
   // get processed string back and print it
