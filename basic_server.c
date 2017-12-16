@@ -15,6 +15,7 @@ void rot13(char *buf){
   }
 }
 
+// Translating the letters to uppercase and lowercase simultaneously
 void translate(char *buf){
   int i = 0;
   int length;
@@ -30,6 +31,13 @@ void translate(char *buf){
   }
 }
 
+// Couldn't figure out how to implement rot(n)
+// Runs along the lines of rot13 however
+/*
+void rotn(char *buf){
+
+}
+*/
 int main() {
   int to_client;
   int from_client;
@@ -45,6 +53,8 @@ int main() {
 
     // rot13 and send back
     rot13(buf);
+    // implement translate here
+    // translate(buf);
     write(to_client, buf, strlen(buf) + 1);
   }
   close(to_client);
