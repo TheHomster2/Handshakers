@@ -25,7 +25,7 @@ int server_handshake(int *to_client) {
   // send message back
   remove("WKP");
   int to = open(buf, O_WRONLY);
-  char buff[sizeof(ACK)] = ACK;
+  char buff[HANDSHAKE_BUFFER_SIZE] = ACK;
   // printf("asdfasdfasdf\n");
   write(to, buff, strlen(buff) + 1);
   printf("server writing buf: %s\n", buff);

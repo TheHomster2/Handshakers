@@ -31,34 +31,25 @@ void translate(char *buf){
   }
 }
 
-// Couldn't figure out how to implement rot(n)
-// Runs along the lines of rot13 however
-/*
-void rotn(char *buf){
-
-}
-*/
 int main() {
   int to_client;
   int from_client;
-
-  // shake
-  from_client = server_handshake(&to_client);
+  char buf[BUFFER_SIZE];
 
   while(1){
-    // wait for client
-    char buf[BUFFER_SIZE];
-    read(from_client, buf, sizeof(buf));
-    printf("recieved: %s", buf);
+    // shake
+    from_client = server_handshake(&to_client);
 
-    // rot13 and send back
-    rot13(buf);
-    // implement translate here
-    // translate(buf);
-    write(to_client, buf, strlen(buf) + 1);
+    // while there is input
+    while(read(from_client, buf, sizeof(buf))){
+      printf("recieved: %s", buf);
+      // rot13 and send back
+      rot13(buf);
+      translate(buf);
+      write(to_client, buf, strlen(buf) + 1);
+    }
+
+    close(to_client);
+    close(from_client);
   }
-  close(to_client);
-  close(from_client);
-
-  return 0;
 }
